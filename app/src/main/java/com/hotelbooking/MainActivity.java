@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final int ScreenDisplay = 4000;
+        final int ScreenDisplay = 3000;
         Thread t1=new Thread(){
             int wait1=0;
             public void run(){
