@@ -28,5 +28,14 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+
+        et_name = findViewById(R.id.et_name);
+        et_username = findViewById(R.id.et_username);
+        et_phone = findViewById(R.id.et_phone);
+        et_password = findViewById(R.id.et_password);
+
+        btn_signup = findViewById(R.id.btn_signup);
+
+
     }
 }
