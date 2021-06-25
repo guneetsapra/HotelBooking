@@ -28,13 +28,13 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-
         et_name = findViewById(R.id.et_name);
         et_username = findViewById(R.id.et_username);
         et_phone = findViewById(R.id.et_phone);
         et_password = findViewById(R.id.et_password);
 
         btn_signup = findViewById(R.id.btn_signup);
+
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +71,37 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
+    private void userRegistration() {
+        String name = et_name.getText().toString();
+        String phone = et_phone.getText().toString();
+        String email = et_username.getText().toString();
+        String pass = et_password.getText().toString();
 
+        pd = new ProgressDialog(RegistrationActivity.this);
+        pd.setMessage("Loading....");
+        pd.show();
+
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<ResponseData> call = service.user_registration(name,email,pass,phone);
+        call.enqueue(new Callback<ResponseData>() {
+            @Override
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                pd.dismiss();
+                if (response.body().status.equals("true")) {
+                    Toast.makeText(RegistrationActivity.this, response.body().message, Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(RegistrationActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    Toast.makeText(RegistrationActivity.this, response.body().message, Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseData> call, Throwable t) {
+                pd.dismiss();
+                Toast.makeText(RegistrationActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
