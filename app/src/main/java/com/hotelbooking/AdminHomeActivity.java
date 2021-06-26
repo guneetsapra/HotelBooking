@@ -23,6 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class AdminHomeActivity extends AppCompatActivity {
 
     List<HotelPojo> hotelInfo;
@@ -77,5 +78,16 @@ public class AdminHomeActivity extends AppCompatActivity {
                 Toast.makeText(AdminHomeActivity.this, "Something went wrong...Please contact admin !", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
