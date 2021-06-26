@@ -45,5 +45,11 @@ public class AdminHomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        list_view = (ListView) findViewById(R.id.hotel_list);
+
+        hotelInfo = new ArrayList<>();
+        getHotels();
+
     }
 }
