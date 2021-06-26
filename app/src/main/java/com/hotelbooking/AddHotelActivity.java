@@ -115,4 +115,29 @@ public class AddHotelActivity extends AppCompatActivity implements EasyPermissio
             return cursor.getString(idx);
         }
     }
+    File file;
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        if(uri != null){
+            String filePath = getRealPathFromURIPath(uri, AddHotelActivity.this);
+            file = new File(filePath);
+        }
+    }
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        Log.d(TAG, "Permission has been denied");
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
