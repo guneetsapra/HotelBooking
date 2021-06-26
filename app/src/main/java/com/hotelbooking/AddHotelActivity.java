@@ -39,9 +39,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AddHotelActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
-    EditText etHotelName,etLocation,etAbout;
-    Button btn_upload,btnAddHotel;
+
+public class AddHotelActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
+    EditText etHotelName, etLocation, etAbout;
+    Button btn_upload, btnAddHotel;
 
     ProgressDialog pd;
     private static final String TAG = AddHotelActivity.class.getSimpleName();
@@ -65,11 +66,11 @@ public class AddHotelActivity extends AppCompatActivity implements EasyPermissio
         sharedPreferences = getSharedPreferences(Utils.SHREF, Context.MODE_PRIVATE);
         session = sharedPreferences.getString("uname", "def-val");
 
-        etHotelName=(EditText)findViewById(R.id.etHotelName);
-        etLocation=(EditText)findViewById(R.id.etLocation);
-        etAbout=(EditText)findViewById(R.id.etAbout);
-        rv_rating=(RatingBar)findViewById(R.id.rv_rating);
-        btn_upload=(Button) findViewById(R.id.btn_upload);
+        etHotelName = (EditText) findViewById(R.id.etHotelName);
+        etLocation = (EditText) findViewById(R.id.etLocation);
+        etAbout = (EditText) findViewById(R.id.etAbout);
+        rv_rating = (RatingBar) findViewById(R.id.rv_rating);
+        btn_upload = (Button) findViewById(R.id.btn_upload);
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +80,7 @@ public class AddHotelActivity extends AppCompatActivity implements EasyPermissio
                 startActivityForResult(openGalleryIntent, REQUEST_GALLERY_CODE);
             }
         });
-        btnAddHotel=(Button) findViewById(R.id.btnAddHotel);
+        btnAddHotel = (Button) findViewById(R.id.btnAddHotel);
         btnAddHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,24 +88,27 @@ public class AddHotelActivity extends AppCompatActivity implements EasyPermissio
             }
         });
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, AddHotelActivity.this);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_GALLERY_CODE && resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_GALLERY_CODE && resultCode == Activity.RESULT_OK) {
             uri = data.getData();
-            if(EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            if (EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 String filePath = getRealPathFromURIPath(uri, AddHotelActivity.this);
                 file = new File(filePath);
 
-            }else{
+            } else {
                 EasyPermissions.requestPermissions(this, getString(R.string.read_file), READ_REQUEST_CODE, Manifest.permission.READ_EXTERNAL_STORAGE);
             }
         }
     }
+
     private String getRealPathFromURIPath(Uri contentURI, Activity activity) {
         Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) {
@@ -115,20 +119,62 @@ public class AddHotelActivity extends AppCompatActivity implements EasyPermissio
             return cursor.getString(idx);
         }
     }
+
     File file;
+
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        if(uri != null){
+        if (uri != null) {
             String filePath = getRealPathFromURIPath(uri, AddHotelActivity.this);
             file = new File(filePath);
         }
     }
+
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         Log.d(TAG, "Permission has been denied");
 
     }
 
+    private void addHotelToServer() {
+        pd = new ProgressDialog(AddHotelActivity.this);
+        pd.setTitle("Loading");
+        pd.show();
+        Map<String, String> map = new HashMap<>();
+        map.put("hname", etHotelName.getText().toString());
+        map.put("about", etAbout.getText().toString());
+        map.put("location", etLocation.getText().toString());
+        map.put("rating", String.valueOf(rv_rating.getRating()));
+        //String rating=;
+        map.put("email", session);
+
+
+        RequestBody mFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), mFile);
+        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(SERVER_PATH)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService uploadImage = retrofit.create(ApiService.class);
+        Call<ResponseData> fileUpload = uploadImage.addhotel(fileToUpload, map);
+        fileUpload.enqueue(new Callback<ResponseData>() {
+            @Override
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                pd.dismiss();
+                Toast.makeText(AddHotelActivity.this, "Hotel Details Added successfully. ", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(AddHotelActivity.this, AdminHomeActivity.class));
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseData> call, Throwable t) {
+                pd.dismiss();
+                Toast.makeText(AddHotelActivity.this, "Error" + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
