@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cd_hotel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="10dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:src="@drawable/samplehotel" />
+
+            <TextView
+                android:layout_below="@+id/image"
+                android:id="@+id/tvHotelname"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+
+                android:text="Hotel Name"
+                android:textColor="#000" />
+
+
+
+
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvHotelname"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Location"
+                android:textColor="#000" />
+
+
+            <TextView
+                android:id="@+id/tvRating"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tvHotelname"
+                android:layout_marginRight="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Rating"
+                android:textColor="#000" />
+
+            <RatingBar
+                android:layout_marginTop="10dp"
+                android:id="@+id/rv_rating"
+                android:scaleX=".3"
+                android:scaleY=".3"
+                android:focusable="false"
+                android:clickable="false"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:saveEnabled="true"
+                android:numStars="5"/>
+
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
