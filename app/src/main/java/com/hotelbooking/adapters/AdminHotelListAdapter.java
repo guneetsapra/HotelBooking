@@ -25,6 +25,7 @@ import retrofit2.Response;
 public class AdminHotelListAdapter extends BaseAdapter {
     List<HotelPojo> hotelInfo;
     Context cnt;
+    String url= "http://cegephotel.com/hotel/";
 
     public AdminHotelListAdapter(List<HotelPojo> hotelInfo, Context cnt) {
         this.hotelInfo = hotelInfo;
@@ -52,7 +53,7 @@ public class AdminHotelListAdapter extends BaseAdapter {
         View hotels = obj1.inflate(R.layout.adapter_adminhotellist, null);
 
         ImageView hotelImage=(ImageView)hotels.findViewById(R.id.image);
-        Glide.with(cnt).load(hotelInfo.get(pos).getImage()).into(hotelImage);
+        Glide.with(cnt).load(url+hotelInfo.get(pos).getImage()).into(hotelImage);
 
         Toast.makeText(cnt,hotelInfo.get(pos).getImage().toString(),Toast.LENGTH_LONG).show();
 
@@ -66,4 +67,4 @@ public class AdminHotelListAdapter extends BaseAdapter {
         return hotels;
     }
 
-}
+}}
