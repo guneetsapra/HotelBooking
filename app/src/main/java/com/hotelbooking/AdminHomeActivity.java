@@ -52,4 +52,30 @@ public class AdminHomeActivity extends AppCompatActivity {
         getHotels();
 
     }
+
+    public void getHotels() {
+        progressDialog = new ProgressDialog(AdminHomeActivity.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
+
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<List<HotelPojo>> call = service.gethotel();
+        call.enqueue(new Callback<List<HotelPojo>>() {
+            @Override
+            public void onResponse(Call<List<HotelPojo>> call, Response<List<HotelPojo>> response) {
+                progressDialog.dismiss();
+                if (response.body() == null) {
+                    Toast.makeText(AdminHomeActivity.this, "No data found", Toast.LENGTH_SHORT).show();
+                } else {
+                    hotelInfo = response.body();
+                    list_view.setAdapter(new AdminHotelListAdapter(hotelInfo, AdminHomeActivity.this));
+                }
+            }
+            @Override
+            public void onFailure(Call<List<HotelPojo>> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(AdminHomeActivity.this, "Something went wrong...Please contact admin !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
