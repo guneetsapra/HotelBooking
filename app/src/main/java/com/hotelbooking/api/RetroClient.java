@@ -4,10 +4,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetroClient {
-    private static final String ROOT_URL = "";
+    private static final String URL = "http://cegephotel.com/";
     public static Retrofit getRetrofitInstance() {
         return new Retrofit.Builder()
-                .baseUrl(ROOT_URL)
+                .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
