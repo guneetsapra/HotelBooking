@@ -15,7 +15,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UserHomeActivity"></activity>
+        <activity android:name=".AddHotelActivity" />
+        <activity android:name=".AdminHomeActivity" />
+        <activity android:name=".AdminLoginActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".RegistrationActivity" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
