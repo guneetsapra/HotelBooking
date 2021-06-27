@@ -67,4 +67,4 @@ public class AdminHotelListAdapter extends BaseAdapter {
         return hotels;
     }
 
-}}
+}

@@ -11,15 +11,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final int ScreenDisplay = 3000;
-        Thread t1=new Thread(){
-            int wait1=0;
+        final int ScreenDisplay = 4000;
+        Thread waittimer=new Thread(){
+            int waiting=0;
             public void run(){
                 try{
-                    while(wait1<=ScreenDisplay )
+                    while(waiting<=ScreenDisplay )
                     {
                         sleep(100);
-                        wait1+=100;
+                        waiting+=100;
                     }
                 }
                 catch(Exception e){
@@ -33,6 +33,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        t1.start();
+        waittimer.start();
     }
 }

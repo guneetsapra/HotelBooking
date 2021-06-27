@@ -63,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please Enter Password..", Toast.LENGTH_SHORT).show();
                     return;
                 }
+              //  startActivity(new Intent(LoginActivity.this, UserHomeActivity.class));
+
                 userLogin();
             }
         });

@@ -3,4 +3,13 @@
     <color name="colorPrimary">#03D3D3</color>
     <color name="colorPrimaryDark">#02BABA</color>
     <color name="colorAccent">#03DAC5</color>
+
+
+    <color name="white_trans">#99FFFFFF</color>
+    <color name="heading_color1">#FF6E40</color>
+
+    <color name="desc_color1">#FFFFFF</color> //remaining items will be in this colour
+
+    <color name="white">#000</color> // when we click item that item will be tin this colour
+
 </resources>

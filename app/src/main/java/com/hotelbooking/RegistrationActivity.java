@@ -82,14 +82,14 @@ public class RegistrationActivity extends AppCompatActivity {
         pd.show();
 
         ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
-        Call<ResponseData> call = service.user_registration(name, email, pass, phone);
+        Call<ResponseData> call = service.user_registration(name,email,pass,phone);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
                 pd.dismiss();
                 if (response.body().status.equals("true")) {
                     Toast.makeText(RegistrationActivity.this, response.body().message, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                    Intent intent=new Intent(RegistrationActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -97,7 +97,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, response.body().message, Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseData> call, Throwable t) {
                 pd.dismiss();
@@ -105,35 +104,4 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
-        public void adminLogin () {
-            //progreess bar loading
-            pd = new ProgressDialog(AdminLoginActivity.this);
-            pd.setTitle("Please wait,Data is being submit...");
-            pd.show();
-            // api call code
-            ApiService apiService = RetroClient.getRetrofitInstance().create(ApiService.class);
-            Call<ResponseData> call = apiService.adminlogin(et_adminusername.getText().toString(), et_adminpassword.getText().toString());
-            call.enqueue(new Callback<ResponseData>() {
-                @Override
-                public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
-                    pd.dismiss();
-                    if (response.body().status.equals("true")) {
-                        SharedPreferences sharedPreferences = getSharedPreferences(Utils.SHREF, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor et = sharedPreferences.edit();
-                        et.putString("user_name", et_adminusername.getText().toString());
-                        et.commit();
-                        startActivity(new Intent(AdminLoginActivity.this, AdminHomeActivity.class));
-                        finish();
-                    } else {
-                        Toast.makeText(AdminLoginActivity.this, response.body().message, Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseData> call, Throwable t) {
-                    pd.dismiss();
-                    Toast.makeText(AdminLoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-    }
+}

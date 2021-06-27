@@ -23,12 +23,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class AdminHomeActivity extends AppCompatActivity {
 
     List<HotelPojo> hotelInfo;
     ListView list_view;
-    ProgressDialog progressDialog;
+    ProgressDialog loading;
     Button btnAddHotel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +54,17 @@ public class AdminHomeActivity extends AppCompatActivity {
     }
 
     public void getHotels() {
-        progressDialog = new ProgressDialog(AdminHomeActivity.this);
-        progressDialog.setMessage("Loading....");
-        progressDialog.show();
+        loading = new ProgressDialog(AdminHomeActivity.this);
+        loading.setMessage("Loading....");
+        loading.show();
 
         ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
         Call<List<HotelPojo>> call = service.gethotel();
         call.enqueue(new Callback<List<HotelPojo>>() {
             @Override
             public void onResponse(Call<List<HotelPojo>> call, Response<List<HotelPojo>> response) {
-                progressDialog.dismiss();
+                loading.dismiss();
+                Toast.makeText(AdminHomeActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                 if (response.body() == null) {
                     Toast.makeText(AdminHomeActivity.this, "No data found", Toast.LENGTH_SHORT).show();
                 } else {
@@ -74,7 +74,7 @@ public class AdminHomeActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<HotelPojo>> call, Throwable t) {
-                progressDialog.dismiss();
+                loading.dismiss();
                 Toast.makeText(AdminHomeActivity.this, "Something went wrong...Please contact admin !", Toast.LENGTH_SHORT).show();
             }
         });
