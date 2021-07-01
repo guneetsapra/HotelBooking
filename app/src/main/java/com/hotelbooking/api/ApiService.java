@@ -55,7 +55,7 @@ public interface ApiService {
     Call<List<HotelPojo>> gethotel();
 
     @GET("hotel/forgotPass.php")
-    Call<ResponseData> forgotPassword(@Query("email") String emailid);
+    Call<ResponseData> getPassword(@Query("emailid") String emailid);
 
     @Multipart
     @POST("hotel/addhotel.php")
@@ -63,6 +63,10 @@ public interface ApiService {
             @Part MultipartBody.Part file,
             @PartMap Map<String, String> partMap
     );
+
+    @GET("/hotel/removehotel.php")
+    Call<ResponseData> deletehotel(@Query("id") String id);
+
 
 
 }
