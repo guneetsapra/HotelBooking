@@ -37,13 +37,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sharedPreferences = getSharedPreferences(Utils.SHREF, Context.MODE_PRIVATE);
-        uname=sharedPreferences.getString("user_name","");
+        uname = sharedPreferences.getString("user_name", "");
 
         btn_retrievepassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(et_email.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(),"Enter your Email",Toast.LENGTH_LONG).show();
+                if (et_email.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter your Email", Toast.LENGTH_LONG).show();
                     return;
                 }
                 forgotPassword();
@@ -51,9 +51,4 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
 
     }
-    public  void forgotPassword()
-    {
-
-
-    }
-    }
+}
