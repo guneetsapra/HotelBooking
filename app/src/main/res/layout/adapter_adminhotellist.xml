@@ -75,6 +75,7 @@
                 android:scaleY=".3"
                 android:focusable="false"
                 android:clickable="false"
+                android:isIndicator="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/tvHotelname"
                 android:layout_width="wrap_content"
@@ -83,7 +84,7 @@
                 android:numStars="5"/>
 
             <Button
-                android:id="@+id/btnDelete"
+                android:id="@+id/deletehotel"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/tvLocation"
@@ -101,7 +102,7 @@
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btnEdit"
+                android:id="@+id/edithotel"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="30dp"
                 android:textSize="13dp"

@@ -50,8 +50,8 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.fragment_search, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Home");
-        search = (EditText) view.findViewById(R.id.et_search);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Home");
+        search = (EditText)view.findViewById(R.id.et_search);
         list_hotels = (ListView) view.findViewById(R.id.list_hotels);
 
 
@@ -63,15 +63,45 @@ public class SearchFragment extends Fragment {
                 // TODO Auto-generated method stub
                 String text = search.getText().toString().toLowerCase(Locale.getDefault());
                 userHomeHotelListAdapter.searchHotel(text);
+            }
 
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
             }
         });
         return view;
     }
-
     public void getHotelList() {
+        loading = new ProgressDialog(getContext());
+        loading.setMessage("Hotels Loading....");
+        loading.show();
+
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<List<HotelPojo>> call = service.gethotel();
+        call.enqueue(new Callback<List<HotelPojo>>() {
+            @Override
+            public void onResponse(Call<List<HotelPojo>> call, Response<List<HotelPojo>> response) {
+                loading.dismiss();
+                if (response.body() == null) {
+                    Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
+                } else {
+                    hotelInfo = response.body();
+                    userHomeHotelListAdapter=new UserHomeHotelListAdapter(hotelInfo,getContext());
+                    list_hotels.setAdapter(userHomeHotelListAdapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<HotelPojo>> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(getContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
-
-
 
