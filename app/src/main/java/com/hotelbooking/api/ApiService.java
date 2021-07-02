@@ -69,4 +69,14 @@ public interface ApiService {
 
 
 
+    @GET("/hotel/updatehotel.php?")
+    Call<ResponseData> updatehotel(
+            @Query("hname") String hname,
+            @Query("location") String location,
+            @Query("about") String about,
+            @Query("rating") String rating,
+            @Query("hid") String hid);
+
+
+
 }
