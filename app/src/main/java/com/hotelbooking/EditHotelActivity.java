@@ -23,8 +23,8 @@ import retrofit2.Response;
 
 public class EditHotelActivity extends AppCompatActivity {
 
-    EditText etHotelName, etLocation, etAbout;
-    Button btn_upload, btnUpdateHotel;
+    EditText etHotelName,etLocation,etAbout;
+    Button btn_upload,btnUpdateHotel;
 
     ProgressDialog loading;
     private static final String TAG = AddHotelActivity.class.getSimpleName();
@@ -44,17 +44,17 @@ public class EditHotelActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        etHotelName = (EditText) findViewById(R.id.etHotelName);
-        etLocation = (EditText) findViewById(R.id.etLocation);
-        etAbout = (EditText) findViewById(R.id.etAbout);
-        rv_rating = (RatingBar) findViewById(R.id.rv_rating);
+        etHotelName=(EditText)findViewById(R.id.etHotelName);
+        etLocation=(EditText)findViewById(R.id.etLocation);
+        etAbout=(EditText)findViewById(R.id.etAbout);
+        rv_rating=(RatingBar)findViewById(R.id.rv_rating);
 
         etHotelName.setText(getIntent().getStringExtra("hname"));
         etLocation.setText(getIntent().getStringExtra("location"));
         etAbout.setText(getIntent().getStringExtra("about"));
         rv_rating.setRating(Float.parseFloat(getIntent().getStringExtra("rating")));
 
-        btnUpdateHotel = (Button) findViewById(R.id.btnUpdateHotel);
+        btnUpdateHotel=(Button)findViewById(R.id.btnUpdateHotel);
         btnUpdateHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,37 @@ public class EditHotelActivity extends AppCompatActivity {
             }
         });
     }
+    public  void updateHotel() {
 
-    public void updateHotel() {
+        String hotel_id=getIntent().getStringExtra("hid");
+        loading= new ProgressDialog(EditHotelActivity.this);
+        loading.setTitle("Please wait,Hotel Data is being updating...");
+        loading.show();
+        ApiService apiService = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<ResponseData> call = apiService.updatehotel(etHotelName.getText().toString(),
+                etLocation.getText().toString(),
+                etAbout.getText().toString(),
+                String.valueOf(rv_rating.getRating()),
+                hotel_id);
+
+        call.enqueue(new Callback<ResponseData>() {
+            @Override
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                loading.dismiss();
+                if (response.body().status.equals("true")) {
+                    startActivity(new Intent(EditHotelActivity.this, AdminHomeActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(EditHotelActivity.this, response.body().message, Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseData> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(EditHotelActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
+
 }
