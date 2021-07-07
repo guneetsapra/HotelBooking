@@ -39,6 +39,20 @@ public class ReviewsAdapter extends BaseAdapter {
         this.con = con;
     }
 
+    @Override
+    public int getCount() {
+        return reviewPojo.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return i;
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
 
     @Override
     public View getView(final int pos, View view, ViewGroup viewGroup) {
