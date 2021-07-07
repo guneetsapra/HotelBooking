@@ -1,159 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/registraion"
-    android:orientation="vertical"
-    >
+    android:layout_height="match_parent">
 
-
-
-   <ImageView
-       android:layout_width="match_parent"
-       android:layout_height="200dp"
-       android:src="@drawable/b"
-       android:scaleType="centerCrop"/>
-
-    
-    <LinearLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/et_name"
-            android:layout_weight=".5"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/registraion"
+                    android:orientation="vertical"
+                    >
+
+
+
+                   <ImageView
+                       android:id="@+id/img"
+                       android:layout_width="match_parent"
+                       android:layout_height="200dp"
+                       android:src="@drawable/b"
+                       android:background="@drawable/buttons"
+                       android:scaleType="centerCrop"/>
+
+
+
+        <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:hint="Enter Name"
-            />
 
-
-        <EditText
-            android:layout_weight="1"
-            android:id="@+id/et_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:hint="Age"
-            />
-
-
-    </LinearLayout>
-
-
-
-    <EditText
-        android:id="@+id/et_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="From Date"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:text="Room Type"/>
-
-    <Spinner
-        android:id="@+id/sp_room"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/buttons"
-        android:entries="@array/room"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:text="No of Days"/>
-
-    <Spinner
-        android:id="@+id/sp_days"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_height="50dp"
-        android:background="@drawable/buttons"
-        android:entries="@array/days"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:text="Select payment Type"/>
-
-    <Spinner
-        android:id="@+id/sp_payment"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_height="50dp"
-        android:background="@drawable/buttons"
-        android:entries="@array/payment"
-        />
-
-
-    <Button
-        android:layout_margin="20dp"
-        android:background="@drawable/buttontwo"
-        android:id="@+id/btn_login"
-
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Continue Payment" />
-
-    <LinearLayout
-        android:id="@+id/lcard"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        >
-
-        <EditText
-            android:id="@+id/et_cardname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:background="@drawable/buttons"
-            android:layout_marginRight="20dp"
-            android:hint="Card Holder Name"
-            />
+            android:orientation="vertical"
+            >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/et_name"
+                            android:layout_weight=".5"
+                            android:background="@drawable/edittext_rounded"
+                            android:padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_margin="20dp"
+                            android:hint="Enter Name"
+                            />
+
+
+                        <EditText
+                            android:layout_weight="1"
+                            android:id="@+id/et_age"
+                            android:background="@drawable/edittext_rounded"
+                            android:padding="10dp"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            android:hint="Age"
+                            />
+
+
+                    </LinearLayout>
+
+
+
+                    <EditText
+                        android:id="@+id/et_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/edittext_rounded"
+                        android:padding="10dp"
+
+                        android:layout_marginRight="20dp"
+                        android:hint="From Date"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="20dp"
+                        android:text="Room Type"/>
+
+                    <Spinner
+                        android:id="@+id/sp_room"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/edittext_rounded"
+                        android:entries="@array/room"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="20dp"
+                        android:text="No of Days"/>
+
+                    <Spinner
+                        android:id="@+id/sp_days"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edittext_rounded"
+                        android:entries="@array/days"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="20dp"
+                        android:text="Select payment Type"/>
+
+                    <Spinner
+                        android:id="@+id/sp_payment"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edittext_rounded"
+                        android:entries="@array/payment"
+                        />
+
+                    <Button
+                        android:layout_margin="20dp"
+                        android:background="@drawable/buttontwo"
+                        android:id="@+id/btn_confirm"
+
+                        android:padding="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Continue Payment" />
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/card"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttons"
+                android:layout_marginTop="@dimen/_5ssp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                >
+
+
+                <TextView
+                    android:id="@+id/tvSecureCheckout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Secure Checkout"
+                    android:textSize="@dimen/_18ssp"
+                    android:textColor="#000000" />
+
+
+                <TextView
+                    android:layout_below="@+id/tvSecureCheckout"
+                    android:text="Name On Card"
+
+                    android:layout_marginTop="@dimen/_5ssp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/etNameonCard"
+                    android:background="@drawable/edittext_rounded"
+
+                    android:hint="Name On Card"
+                    android:padding="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:textColorHint="#C5BFC2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+
+
+                <TextView
+                    android:text="Debit / Credit card number"
+
+                    android:layout_marginTop="@dimen/_5ssp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/etCardNumber"
+                    android:layout_below="@+id/tvName"
+                    android:background="@drawable/edittext_rounded"
+                    android:hint="XXXX-XXXX-XXXX-XXXX"
+                    android:padding="8dp"
+                    android:inputType="number"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:textColorHint="#C5BFC2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="14dp"
+
+                            android:text="Exp Date"
+                       />
+
+
+                        <EditText
+                            android:id="@+id/etExapDate"
+                            android:background="@drawable/edittext_rounded"
+                            android:hint="XXXX"
+                            android:padding="8dp"
+                            android:inputType="number"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginRight="13dp"
+                            android:textColorHint="#C5BFC2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="14dp"
+                            android:text="CVV"
+
+                        />
+
+
+                        <EditText
+                            android:id="@+id/etCvvumber"
+                            android:background="@drawable/edittext_rounded"
+                            android:hint="XXXX"
+                            android:padding="8dp"
+                            android:inputType="number"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginRight="13dp"
+                            android:layout_marginBottom="@dimen/_8ssp"
+                            android:textColorHint="#C5BFC2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_margin="20dp"
+                    android:background="@drawable/buttontwo"
+                    android:id="@+id/btn_payment"
+                    android:padding="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pay" />
+
+            </LinearLayout>
 
 
 
 
 
-    </LinearLayout>
 
 
 
+                </LinearLayout>
 
 
+    </RelativeLayout>
 
-
-</LinearLayout>
+</ScrollView>

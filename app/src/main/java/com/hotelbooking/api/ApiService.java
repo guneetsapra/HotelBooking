@@ -1,8 +1,5 @@
 package com.hotelbooking.api;
 
-
-
-
 import com.hotelbooking.model.HotelPojo;
 import com.hotelbooking.model.MyProfilePojo;
 import com.hotelbooking.model.ResponseData;
@@ -18,7 +15,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
-
 
 public interface ApiService {
 
@@ -78,5 +74,42 @@ public interface ApiService {
             @Query("hid") String hid);
 
 
+    //name,age,bdate,room,days,payment,cardname,cardno,cardexp,cardcvv,email,hid
+    @GET("/hotel/bookHotel.php?")
+    Call<ResponseData> book(
+            @Query("name") String name,
+            @Query("age") String age,
+            @Query("bdate") String bdate,
+            @Query("room") String room,
+            @Query("days") String days,
+            @Query("payment") String payment,
+            @Query("cardname") String cardname,
+            @Query("cardno") String cardno,
+            @Query("cardexp") String cardexp,
+            @Query("cardcvv") String cardcvv,
+            @Query("email") String email,
+            @Query("hid") String hid);
+
+    //name,msg,email,rating,hid
+    @GET("/hotel/writeReview.php?")
+    Call<ResponseData> writeReview(
+            @Query("name") String name,
+            @Query("msg") String msg,
+            @Query("email") String email,
+            @Query("rating") String rating,
+            @Query("hid") String hid);
+
+    @GET("/hotel/getreviews.php?")
+    Call<List<ReviewPojo>> getreviews(
+            @Query("hid") String hid);
+
+    @GET("/hotel/cancelBooking.php?")
+    Call<ResponseData> cancelBooking(
+            @Query("bid") String bid);
+
+
+    @GET("/hotel/mybookings.php?")
+    Call<List<BookingsPojo>> mybookings(
+            @Query("email") String email);
 
 }
