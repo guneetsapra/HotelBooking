@@ -110,6 +110,40 @@ public class HotelDetailsActivity extends AppCompatActivity {
     }
 
     public void getReviews(final String hid) {
+        loading = new ProgressDialog(HotelDetailsActivity.this);
+        loading.setMessage("Loading....");
+        loading.show();
 
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<List<ReviewPojo>> call = service.getreviews(hid);
+        call.enqueue(new Callback<List<ReviewPojo>>() {
+            @Override
+            public void onResponse(Call<List<ReviewPojo>> call, Response<List<ReviewPojo>> response) {
+                loading.dismiss();
+                // Toast.makeText(HotelDetailsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                if (response.body() == null) {
+                    Toast.makeText(HotelDetailsActivity.this, "No data found", Toast.LENGTH_SHORT).show();
+                } else {
+                    hotelInfo = response.body();
+                    hotel_reviews.setAdapter(new ReviewsAdapter(hotelInfo, HotelDetailsActivity.this));
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ReviewPojo>> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(HotelDetailsActivity.this, "Something went wrong...Please contact admin !", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
