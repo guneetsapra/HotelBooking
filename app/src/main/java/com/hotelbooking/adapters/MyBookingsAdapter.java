@@ -95,4 +95,33 @@ public class MyBookingsAdapter  extends BaseAdapter {
         return bookings;
     }
 
+    ProgressDialog progressDialog;
+    public void cancelbooking(String bid){
+        progressDialog = new ProgressDialog(con);
+        progressDialog.setMessage("Processing please wait");
+        progressDialog.show();
+
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<ResponseData> call = service.cancelBooking(bid);
+        call.enqueue(new Callback<ResponseData>() {
+            @Override
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                progressDialog.dismiss();
+                if(response.body()==null){
+                    Toast.makeText(con,"Server issue",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent=new Intent(con, UserHomeActivity.class);
+                    con.startActivity(intent);
+                    Toast.makeText(con,"Cancelled successfully",Toast.LENGTH_SHORT).show();
+
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseData> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(con, "Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
