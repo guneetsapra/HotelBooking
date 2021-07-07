@@ -16,44 +16,104 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"/>
 
-        <TextView
-            android:id="@+id/tvhname"
-            android:layout_width="wrap_content"
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="14dp"
-            android:text="Hotel Name"
-            android:textColor="#000"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvhname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Hotel Name"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
 
 
-        <TextView
-            android:id="@+id/tvlocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="14dp"
-            android:text="Location"
-            android:textColor="#000"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvlocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Location"
+                    android:textColor="#000"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
 
-        <RatingBar
-            android:id="@+id/rv_rating"
-            android:layout_marginLeft="3dp"
-            android:scaleX=".4"
-            android:scaleY=".4"
-            android:focusable="false"
-            android:clickable="false"
-            android:isIndicator="true"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="13dp"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:numStars="5"/>
+                <RatingBar
+                    android:id="@+id/rv_rating"
+                    android:layout_marginLeft="3dp"
+                    android:scaleX=".4"
+                    android:scaleY=".4"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:isIndicator="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:numStars="5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book"
+                    android:id="@+id/btnbook"
+                    android:layout_gravity="right"
+                    android:background="@drawable/buttontwo"/>
+
+                <LinearLayout
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/imgmsg"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_launchermsg"/>
+
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:id="@+id/imgcall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_launchercall"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
 
         <TextView
             android:id="@+id/tvdescription"
@@ -65,16 +125,6 @@
             android:textSize="16dp"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnbook"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/buttontwo"
-            android:text="Book"
-            android:textColor="#fff" />
 
 
 
