@@ -29,7 +29,7 @@ public class AdminViewBookingsActivity extends AppCompatActivity {
     ListView list_bookings;
     ProgressDialog loading;
     SharedPreferences sharedPreferences;
-
+    AdminBookingsAdapter myBookingsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +46,30 @@ public class AdminViewBookingsActivity extends AppCompatActivity {
     }
 
     public void getMyBookings() {
+//        loading = new ProgressDialog(getApplicationContext());
+//        loading.setMessage("Customer Bookings Loading");
+//        loading.show();
+
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<List<BookingsPojo>> call = service.myadminbookings();
+        call.enqueue(new Callback<List<BookingsPojo>>() {
+            @Override
+            public void onResponse(Call<List<BookingsPojo>> call, Response<List<BookingsPojo>> response) {
+                //   loading.dismiss();
+                if (response.body() == null) {
+                    Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_SHORT).show();
+                } else {
+                    hotelInfo = response.body();
+                    myBookingsAdapter=new AdminBookingsAdapter(hotelInfo,getApplicationContext());
+                    list_bookings.setAdapter(myBookingsAdapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<BookingsPojo>> call, Throwable t) {
+                //  loading.dismiss();
+                Toast.makeText(getApplicationContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
