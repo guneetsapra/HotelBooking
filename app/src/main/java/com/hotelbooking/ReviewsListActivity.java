@@ -39,6 +39,13 @@ public class ReviewsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews_list);
 
+        getSupportActionBar().setTitle("Reviews and ratings");
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        hotel_reviews=(ListView)findViewById(R.id.hotel_reviews);
+        hotelInfo = new ArrayList<>();
+        getReviews(getIntent().getStringExtra("hid"));
     }
 
     public void getReviews(final String hid) {
