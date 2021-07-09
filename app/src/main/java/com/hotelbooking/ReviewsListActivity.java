@@ -49,6 +49,30 @@ public class ReviewsListActivity extends AppCompatActivity {
     }
 
     public void getReviews(final String hid) {
+        loading = new ProgressDialog(ReviewsListActivity.this);
+        loading.setMessage("Loading....");
+        loading.show();
+
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<List<ReviewPojo>> call = service.getreviews(hid);
+        call.enqueue(new Callback<List<ReviewPojo>>() {
+            @Override
+            public void onResponse(Call<List<ReviewPojo>> call, Response<List<ReviewPojo>> response) {
+                loading.dismiss();
+                // Toast.makeText(HotelDetailsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                if (response.body() == null) {
+                    Toast.makeText(ReviewsListActivity.this, "No data found", Toast.LENGTH_SHORT).show();
+                } else {
+                    hotelInfo = response.body();
+                    hotel_reviews.setAdapter(new ReviewsAdapter(hotelInfo, ReviewsListActivity.this));
+                }
+            }
+            @Override
+            public void onFailure(Call<List<ReviewPojo>> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(ReviewsListActivity.this, "Something went wrong...Please contact admin !", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
