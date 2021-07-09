@@ -1,8 +1,13 @@
 package com.hotelbooking.api;
 
+
+
+
+import com.hotelbooking.model.BookingsPojo;
 import com.hotelbooking.model.HotelPojo;
 import com.hotelbooking.model.MyProfilePojo;
 import com.hotelbooking.model.ResponseData;
+import com.hotelbooking.model.ReviewPojo;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +20,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
+
 
 public interface ApiService {
 
@@ -105,11 +111,15 @@ public interface ApiService {
 
     @GET("/hotel/cancelBooking.php?")
     Call<ResponseData> cancelBooking(
-            @Query("bid") String bid);
+            @Query("bid") String bid,
+            @Query("email") String email);
 
 
     @GET("/hotel/mybookings.php?")
     Call<List<BookingsPojo>> mybookings(
             @Query("email") String email);
+
+    @GET("/hotel/myadminbookings.php?")
+    Call<List<BookingsPojo>> myadminbookings();
 
 }
