@@ -64,7 +64,7 @@ public class AdminHotelsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<HotelPojo>> call, Response<List<HotelPojo>> response) {
                 loading.dismiss();
-                //   Toast.makeText(AdminHotelsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(AdminHotelsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                 if (response.body() == null) {
                     Toast.makeText(AdminHotelsActivity.this, "No data found", Toast.LENGTH_SHORT).show();
                 } else {

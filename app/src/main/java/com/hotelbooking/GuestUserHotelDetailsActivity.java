@@ -33,7 +33,7 @@ public class GuestUserHotelDetailsActivity extends AppCompatActivity {
     TextView tvhotelname, tvlocation,tvabout;
     RatingBar rv_rating;
     ImageView getimage, imgmsg, imgcall;
-    Button btnbook,btn_write;
+    Button btnbook,btn_write,btnrooms;
     ListView hotel_reviews;
     List<ReviewPojo> hotelInfo;
     ProgressDialog loading;
@@ -48,6 +48,16 @@ public class GuestUserHotelDetailsActivity extends AppCompatActivity {
         tvlocation=(TextView)findViewById(R.id.tvlocation);
         tvabout=(TextView)findViewById(R.id.tvdescription);
         rv_rating=(RatingBar)findViewById(R.id.rv_rating);
+
+        btnrooms=(Button)findViewById(R.id.btnrooms);
+        btnrooms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(GuestUserHotelDetailsActivity.this, ViewRoomsActivity.class);
+                i.putExtra("hid",getIntent().getStringExtra("hid"));
+                startActivity(i);
+            }
+        });
 
         hotel_reviews=(ListView)findViewById(R.id.hotel_reviews);
         hotelInfo = new ArrayList<>();
@@ -86,9 +96,13 @@ public class GuestUserHotelDetailsActivity extends AppCompatActivity {
         imgcall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+123));//change the number
-                startActivity(callIntent);
+//                Intent callIntent = new Intent(Intent.ACTION_CALL);
+//                callIntent.setData(Uri.parse("tel:"+123));//change the number
+//                startActivity(callIntent);
+
+                String phone = "+512667788";
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                startActivity(intent);
             }
         });
 

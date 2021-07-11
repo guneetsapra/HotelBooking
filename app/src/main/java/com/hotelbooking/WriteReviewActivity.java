@@ -79,5 +79,36 @@ public class WriteReviewActivity extends AppCompatActivity {
 
 
     private void submitReview() {
+        String name = etname.getText().toString();
+        String msg = etreview.getText().toString();
+        String email = session;
+        String rating = String.valueOf(rv_rating.getRating());
+        String hid = getIntent().getStringExtra("hid");
+        pd = new ProgressDialog(WriteReviewActivity.this);
+        pd.setMessage("Loading....");
+        pd.show();
+
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<ResponseData> call = service.writeReview(name,msg,email,rating,hid);
+        call.enqueue(new Callback<ResponseData>() {
+            @Override
+            public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
+                pd.dismiss();
+                if (response.body().status.equals("true")) {
+                    Toast.makeText(WriteReviewActivity.this, response.body().message, Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(WriteReviewActivity.this, UserHomeActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    Toast.makeText(WriteReviewActivity.this, response.body().message, Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseData> call, Throwable t) {
+                pd.dismiss();
+                Toast.makeText(WriteReviewActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

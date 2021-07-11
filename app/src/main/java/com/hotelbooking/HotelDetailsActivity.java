@@ -37,7 +37,7 @@ public class HotelDetailsActivity extends AppCompatActivity {
     TextView tvhotelname, tvlocation,tvabout;
     RatingBar rv_rating;
     ImageView getimage, imgmsg, imgcall;
-    Button btnbook,btn_write;
+    Button btnbook,btn_write,btnrooms;
     ListView hotel_reviews;
     List<ReviewPojo> hotelInfo;
     ProgressDialog loading;
@@ -56,6 +56,16 @@ public class HotelDetailsActivity extends AppCompatActivity {
         hotel_reviews=(ListView)findViewById(R.id.hotel_reviews);
         hotelInfo = new ArrayList<>();
         getReviews(getIntent().getStringExtra("hid"));
+
+        btnrooms=(Button)findViewById(R.id.btnrooms);
+        btnrooms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(HotelDetailsActivity.this, ViewRoomsActivity.class);
+                i.putExtra("hid",getIntent().getStringExtra("hid"));
+                startActivity(i);
+            }
+        });
 
         btn_write=(Button)findViewById(R.id.btn_write);
         btn_write.setOnClickListener(new View.OnClickListener() {
@@ -95,9 +105,9 @@ public class HotelDetailsActivity extends AppCompatActivity {
         imgcall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+123));//change the number
-                startActivity(callIntent);
+                String phone = "+512667788";
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                startActivity(intent);
             }
         });
 
@@ -120,7 +130,7 @@ public class HotelDetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ReviewPojo>> call, Response<List<ReviewPojo>> response) {
                 loading.dismiss();
-                // Toast.makeText(HotelDetailsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(HotelDetailsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                 if (response.body() == null) {
                     Toast.makeText(HotelDetailsActivity.this, "No data found", Toast.LENGTH_SHORT).show();
                 } else {

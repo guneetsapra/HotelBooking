@@ -65,13 +65,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     Toast.makeText(ForgotPasswordActivity.this, response.body().message, Toast.LENGTH_LONG).show();
                    // Log.i("sample", "" + response.body().message);
 
-
-
                 } else {
                     Toast.makeText(ForgotPasswordActivity.this, response.body().message, Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseData> call, Throwable t) {
                 Log.d("sample","Response = "+t.toString());

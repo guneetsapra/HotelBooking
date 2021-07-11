@@ -3,6 +3,7 @@ package com.hotelbooking.adapters;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.annotations.SerializedName;
+import com.hotelbooking.AdminHomeActivity;
+import com.hotelbooking.AdminViewReviewsActivity;
+import com.hotelbooking.EditHotelActivity;
+import com.hotelbooking.FullReciptActivity;
 import com.hotelbooking.R;
 import com.hotelbooking.UserHomeActivity;
+import com.hotelbooking.Utils;
 import com.hotelbooking.api.ApiService;
 import com.hotelbooking.api.RetroClient;
 import com.hotelbooking.fragment.HomeFragment;
@@ -31,6 +38,8 @@ import retrofit2.Response;
 public class MyBookingsAdapter  extends BaseAdapter {
     List<BookingsPojo> bookingsPojo;
     Context con;
+    SharedPreferences sharedPreferences;
+    String uname;
 
 
     public MyBookingsAdapter(List<BookingsPojo> bookingsPojo, Context con) {
@@ -74,9 +83,32 @@ public class MyBookingsAdapter  extends BaseAdapter {
         tvreceipt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(con,"Comming soon..",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(con, FullReciptActivity.class);
+                intent.putExtra("bid",bookingsPojo.get(pos).getBid());
+                intent.putExtra("hid",bookingsPojo.get(pos).getHid());
+                intent.putExtra("hotel_name",bookingsPojo.get(pos).getHotel_name());
+                intent.putExtra("location",bookingsPojo.get(pos).getLocation());
+                intent.putExtra("rating",bookingsPojo.get(pos).getRating());
+
+                intent.putExtra("pic",bookingsPojo.get(pos).getImage());
+                intent.putExtra("name",bookingsPojo.get(pos).getName());
+                intent.putExtra("age",bookingsPojo.get(pos).getAge());
+                intent.putExtra("bdate",bookingsPojo.get(pos).getBdate());
+                intent.putExtra("room",bookingsPojo.get(pos).getRoom());
+
+
+                intent.putExtra("days",bookingsPojo.get(pos).getDays());
+                intent.putExtra("payment",bookingsPojo.get(pos).getPayment());
+                intent.putExtra("email",bookingsPojo.get(pos).getEmail());
+                intent.putExtra("status",bookingsPojo.get(pos).getStatus());
+
+                con.startActivity(intent);
+
             }
         });
+
+        sharedPreferences = con.getSharedPreferences(Utils.SHREF, Context.MODE_PRIVATE);
+        uname=sharedPreferences.getString("user_name","");
 
         if(bookingsPojo.get(pos).getStatus().equals("Booked"))
         {
@@ -85,7 +117,7 @@ public class MyBookingsAdapter  extends BaseAdapter {
             btncancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cancelbooking(bookingsPojo.get(pos).getBid());
+                    cancelbooking(bookingsPojo.get(pos).getBid(),uname);
                 }
             });
         }
@@ -96,13 +128,13 @@ public class MyBookingsAdapter  extends BaseAdapter {
     }
 
     ProgressDialog progressDialog;
-    public void cancelbooking(String bid){
+    public void cancelbooking(String bid, String email){
         progressDialog = new ProgressDialog(con);
         progressDialog.setMessage("Processing please wait");
         progressDialog.show();
 
         ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
-        Call<ResponseData> call = service.cancelBooking(bid);
+        Call<ResponseData> call = service.cancelBooking(bid,email);
         call.enqueue(new Callback<ResponseData>() {
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {

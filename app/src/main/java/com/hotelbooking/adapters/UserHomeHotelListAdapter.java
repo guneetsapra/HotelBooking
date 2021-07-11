@@ -19,6 +19,7 @@ import com.hotelbooking.HotelDetailsActivity;
 import com.hotelbooking.R;
 import com.hotelbooking.model.HotelPojo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,6 +31,8 @@ public class UserHomeHotelListAdapter extends BaseAdapter {
         this.hotelInfo = hotelInfo;
         this.con = con;
         this.search=hotelInfo;
+        this.hotelInfo = new ArrayList<HotelPojo>();
+        this.hotelInfo.addAll(hotelInfo);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class UserHomeHotelListAdapter extends BaseAdapter {
         ImageView hotelImage=(ImageView)hotels.findViewById(R.id.image);
         Glide.with(con).load(url+hotelInfo.get(pos).getImage()).into(hotelImage);
 
-        Toast.makeText(con,hotelInfo.get(pos).getImage().toString(),Toast.LENGTH_LONG).show();
+       // Toast.makeText(con,hotelInfo.get(pos).getImage().toString(),Toast.LENGTH_LONG).show();
 
         TextView tvHotelname = (TextView) hotels.findViewById(R.id.tvHotelname);
         tvHotelname.setText(hotelInfo.get(pos).getHotel_name());
@@ -102,5 +105,6 @@ public class UserHomeHotelListAdapter extends BaseAdapter {
         }
         notifyDataSetChanged();
     }
+
 
 }

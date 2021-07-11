@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/action_item3"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/action_bookings"
+        android:icon="@drawable/ic_baseline_library_books_24"
+        android:title="Bookings" />
+
+    <item
         android:id="@+id/action_item1"
         android:icon="@drawable/ic_home"
         android:title="Home" />
@@ -8,9 +18,11 @@
         android:id="@+id/action_item2"
         android:icon="@drawable/ic_baseline_search_24"
         android:title="Search" />
+
     <item
-        android:id="@+id/action_item3"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile" />
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_baseline_login_24"
+        android:title="Logout" />
+
 
 </menu>

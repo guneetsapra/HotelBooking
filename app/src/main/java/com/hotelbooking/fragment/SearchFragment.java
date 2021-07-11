@@ -1,12 +1,14 @@
 package com.hotelbooking.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.hotelbooking.R;
+import com.hotelbooking.SearchHotelActivity;
 import com.hotelbooking.adapters.UserHomeHotelListAdapter;
 import com.hotelbooking.api.ApiService;
 import com.hotelbooking.api.RetroClient;
@@ -38,6 +41,7 @@ public class SearchFragment extends Fragment {
     ListView list_hotels;
     ProgressDialog loading;
     EditText search;
+    Button btnsearch;
     UserHomeHotelListAdapter userHomeHotelListAdapter;
 
     public static SearchFragment searchFragment() {
@@ -54,6 +58,14 @@ public class SearchFragment extends Fragment {
         search = (EditText)view.findViewById(R.id.et_search);
         list_hotels = (ListView) view.findViewById(R.id.list_hotels);
 
+        btnsearch=(Button) view.findViewById(R.id.btnsearch);
+        btnsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getActivity(), SearchHotelActivity.class);
+                startActivity(i);
+            }
+        });
 
         hotelInfo = new ArrayList<>();
         getHotelList();

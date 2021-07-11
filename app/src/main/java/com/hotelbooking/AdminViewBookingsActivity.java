@@ -55,7 +55,7 @@ public class AdminViewBookingsActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<BookingsPojo>>() {
             @Override
             public void onResponse(Call<List<BookingsPojo>> call, Response<List<BookingsPojo>> response) {
-                //   loading.dismiss();
+             //   loading.dismiss();
                 if (response.body() == null) {
                     Toast.makeText(getApplicationContext(), "No data found", Toast.LENGTH_SHORT).show();
                 } else {
@@ -66,7 +66,7 @@ public class AdminViewBookingsActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<BookingsPojo>> call, Throwable t) {
-                //  loading.dismiss();
+              //  loading.dismiss();
                 Toast.makeText(getApplicationContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });

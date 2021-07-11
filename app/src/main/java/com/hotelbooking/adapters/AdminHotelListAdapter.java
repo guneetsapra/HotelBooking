@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.hotelbooking.AddRoomActivity;
 import com.hotelbooking.AdminHomeActivity;
 import com.hotelbooking.EditHotelActivity;
 import com.hotelbooking.R;
@@ -71,6 +72,18 @@ public class AdminHotelListAdapter extends BaseAdapter {
 
         RatingBar rv_rating= (RatingBar)hotels.findViewById(R.id.rv_rating);
         rv_rating.setRating(Float.parseFloat(hotelInfo.get(pos).getRating()));
+
+
+        TextView tvaddrooms = (TextView) hotels.findViewById(R.id.tvaddrooms);
+        tvaddrooms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(con, AddRoomActivity.class);
+                intent.putExtra("hid",hotelInfo.get(pos).getHid());
+                con.startActivity(intent);
+            }
+        });
+
 
         Button btnEdit=(Button)hotels.findViewById(R.id.edithotel);
         btnEdit.setOnClickListener(new View.OnClickListener() {

@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     EditText et_username, et_password;
-    TextView tv_forgotpassword;
+    TextView tv_forgotpassword,tv_guest;
     Button btn_signup, btn_login, btn_adminlogin;
     ProgressDialog pd;
     @Override
@@ -35,6 +35,14 @@ public class LoginActivity extends AppCompatActivity {
         et_username = findViewById(R.id.et_username);
         et_password = findViewById(R.id.et_password);
         tv_forgotpassword = findViewById(R.id.tv_forgotpassword);
+        tv_guest=findViewById(R.id.tv_guest);
+        tv_guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(LoginActivity.this, GuestUserActivity.class);
+                startActivity(i);
+            }
+        });
         tv_forgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
