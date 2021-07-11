@@ -1,6 +1,7 @@
 package com.hotelbooking;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -25,69 +26,60 @@ import retrofit2.Response;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
-    List<HotelPojo> hotelInfo;
-    ListView list_view;
-    ProgressDialog loading;
-    Button btnAddHotel;
+    CardView cdHotels,cdBookings,cdReviews,cdChat;
+    Button btnLogout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
-        getSupportActionBar().setTitle("Hotels List");
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Admin Dashboard");
 
-        btnAddHotel = (Button) findViewById(R.id.add_hotel);
-        btnAddHotel.setOnClickListener(new View.OnClickListener() {
+        cdHotels=(CardView)findViewById(R.id.cdHotels);
+        cdHotels.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminHomeActivity.this, AddHotelActivity.class);
+                Intent intent=new Intent(AdminHomeActivity.this,AdminHotelsActivity.class);
                 startActivity(intent);
             }
         });
 
-        list_view = (ListView) findViewById(R.id.hotel_list);
-
-        hotelInfo = new ArrayList<>();
-        getHotels();
-
-    }
-
-    public void getHotels() {
-        loading = new ProgressDialog(AdminHomeActivity.this);
-        loading.setMessage("Loading....");
-        loading.show();
-
-        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
-        Call<List<HotelPojo>> call = service.gethotel();
-        call.enqueue(new Callback<List<HotelPojo>>() {
+        cdBookings=(CardView)findViewById(R.id.cdBookings);
+        cdBookings.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<List<HotelPojo>> call, Response<List<HotelPojo>> response) {
-                loading.dismiss();
-                Toast.makeText(AdminHomeActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-                if (response.body() == null) {
-                    Toast.makeText(AdminHomeActivity.this, "No data found", Toast.LENGTH_SHORT).show();
-                } else {
-                    hotelInfo = response.body();
-                    list_view.setAdapter(new AdminHotelListAdapter(hotelInfo, AdminHomeActivity.this));
-                }
-            }
-            @Override
-            public void onFailure(Call<List<HotelPojo>> call, Throwable t) {
-                loading.dismiss();
-                Toast.makeText(AdminHomeActivity.this, "Something went wrong...Please contact admin !", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent=new Intent(AdminHomeActivity.this,AdminViewBookingsActivity.class);
+                startActivity(intent);
             }
         });
+
+        cdReviews=(CardView)findViewById(R.id.cdReviews);
+        cdReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AdminHomeActivity.this,AdminViewReviewsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cdChat=(CardView)findViewById(R.id.cdChat);
+        cdChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AdminHomeActivity.this,AdminChatActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminHomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+
 }
