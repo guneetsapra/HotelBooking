@@ -8,6 +8,7 @@ import com.hotelbooking.model.HotelPojo;
 import com.hotelbooking.model.MyProfilePojo;
 import com.hotelbooking.model.ResponseData;
 import com.hotelbooking.model.ReviewPojo;
+import com.hotelbooking.model.RoomsPojo;
 
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,14 @@ public interface ApiService {
             @PartMap Map<String, String> partMap
     );
 
+
+    @Multipart
+    @POST("hotel/addroom.php")
+    Call<ResponseData> addroom(
+            @Part MultipartBody.Part file,
+            @PartMap Map<String, String> partMap
+    );
+
     @GET("/hotel/removehotel.php")
     Call<ResponseData> deletehotel(@Query("id") String id);
 
@@ -107,6 +116,11 @@ public interface ApiService {
 
     @GET("/hotel/getreviews.php?")
     Call<List<ReviewPojo>> getreviews(
+            @Query("hid") String hid);
+
+
+    @GET("/hotel/getRooms.php?")
+    Call<List<RoomsPojo>> getRooms(
             @Query("hid") String hid);
 
     @GET("/hotel/cancelBooking.php?")
