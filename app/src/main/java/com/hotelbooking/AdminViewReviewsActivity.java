@@ -46,7 +46,30 @@ public class AdminViewReviewsActivity extends AppCompatActivity {
     }
 
     public void getHotels() {
+        loading = new ProgressDialog(AdminViewReviewsActivity.this);
+        loading.setMessage("Loading....");
+        loading.show();
 
+        ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
+        Call<List<HotelPojo>> call = service.gethotel();
+        call.enqueue(new Callback<List<HotelPojo>>() {
+            @Override
+            public void onResponse(Call<List<HotelPojo>> call, Response<List<HotelPojo>> response) {
+                loading.dismiss();
+              //  Toast.makeText(AdminViewReviewsActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                if (response.body() == null) {
+                    Toast.makeText(AdminViewReviewsActivity.this, "No data found", Toast.LENGTH_SHORT).show();
+                } else {
+                    hotelInfo = response.body();
+                    list_view.setAdapter(new AdminHotelswithReviews(hotelInfo, AdminViewReviewsActivity.this));
+                }
+            }
+            @Override
+            public void onFailure(Call<List<HotelPojo>> call, Throwable t) {
+                loading.dismiss();
+                Toast.makeText(AdminViewReviewsActivity.this, "Something went wrong...Please contact admin !", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
