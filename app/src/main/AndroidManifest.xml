@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,23 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserHomeActivity"></activity>
+        <activity android:name=".SearchHotelActivity"></activity>
+        <activity android:name=".AdminChatActivity" />
+        <activity android:name=".ViewRoomsActivity" />
+        <activity android:name=".AddRoomActivity" />
+        <activity android:name=".ReviewsListActivity" />
+        <activity android:name=".FullReciptActivity" />
+        <activity android:name=".AdminViewReviewsActivity" />
+        <activity android:name=".AdminViewBookingsActivity" />
+        <activity android:name=".AdminHotelsActivity" />
+        <activity android:name=".GuestUserHotelDetailsActivity" />
+        <activity android:name=".GuestUserActivity" />
+        <activity android:name=".MyBookingsActivity" />
+        <activity android:name=".WriteReviewActivity" />
+        <activity android:name=".BookHotelActivity" />
+        <activity android:name=".HotelDetailsActivity" />
+        <activity android:name=".EditHotelActivity" />
+        <activity android:name=".UserHomeActivity" />
         <activity android:name=".AddHotelActivity" />
         <activity android:name=".AdminHomeActivity" />
         <activity android:name=".AdminLoginActivity" />
