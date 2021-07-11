@@ -50,7 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Forgot Password"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="0dp"
         android:layout_gravity="right"
         android:textSize="18dp"
         android:textColor="#000"
@@ -88,7 +90,9 @@
 
 
     <Button
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="0dp"
         android:background="@drawable/buttontwo"
         android:id="@+id/btn_adminlogin"
         android:textColor="#fff"
@@ -100,5 +104,16 @@
         android:text="Admin Login" />
 
 
+
+    <TextView
+        android:id="@+id/tv_guest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="As a Guest"
+        android:layout_margin="20dp"
+        android:layout_gravity="right"
+        android:textSize="22dp"
+        android:textColor="#000"
+        android:gravity="right"/>
 
 </LinearLayout>

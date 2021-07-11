@@ -16,8 +16,20 @@
         android:hint="Search Hotel" />
 
 
+    <Button
+        android:id="@+id/btnsearch"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_height="30dp"
+        android:gravity="right"
+        android:textSize="10dp"
+        android:layout_marginLeft="270dp"
+        android:text="Custom Search"
+        android:background="@drawable/buttontwo"
+        android:layout_below="@+id/et_search"/>
+
     <ListView
-        android:layout_below="@+id/et_search"
+        android:layout_below="@+id/btnsearch"
         android:layout_margin="10dp"
         android:id="@+id/list_hotels"
         android:layout_width="match_parent"

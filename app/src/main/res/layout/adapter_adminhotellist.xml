@@ -110,7 +110,7 @@
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
+
                 android:background="@drawable/buttontwo"
                 android:textColor="#fff"
                 android:textStyle="bold"
@@ -118,7 +118,21 @@
                 android:textAllCaps="false" />
 
 
+            <TextView
+                android:layout_below="@+id/edithotel"
+                android:id="@+id/tvaddrooms"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Rooms"
+                />
+
+
         </RelativeLayout>
+
 
 
     </androidx.cardview.widget.CardView>

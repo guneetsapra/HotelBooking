@@ -109,6 +109,16 @@
 
                 </LinearLayout>
 
+
+                <Button
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Rooms"
+                    android:id="@+id/btnrooms"
+                    android:layout_gravity="right"
+                    android:background="@drawable/buttontwo"/>
+
             </LinearLayout>
 
 

@@ -96,12 +96,23 @@
 
                     <Spinner
                         android:id="@+id/sp_room"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/edittext_rounded"
                         android:entries="@array/room"
+                        />
+
+                    <Spinner
+                        android:id="@+id/sp_dyroom"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/edittext_rounded"
+
                         />
 
                     <TextView
