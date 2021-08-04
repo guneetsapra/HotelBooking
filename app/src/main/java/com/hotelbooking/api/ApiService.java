@@ -4,6 +4,7 @@ package com.hotelbooking.api;
 
 
 import com.hotelbooking.model.BookingsPojo;
+import com.hotelbooking.model.Chat;
 import com.hotelbooking.model.HotelPojo;
 import com.hotelbooking.model.MyProfilePojo;
 import com.hotelbooking.model.ResponseData;
@@ -135,5 +136,23 @@ public interface ApiService {
 
     @GET("/hotel/myadminbookings.php?")
     Call<List<BookingsPojo>> myadminbookings();
+
+    @GET("/hotel/chat.php")
+    Call<ResponseData> msglist(@Query("frm") String frm,
+                               @Query("hid") String hid,
+                               @Query("message") String message);
+
+    @GET("/hotel/getchat.php")
+    Call<List<Chat>> getchat(@Query("frm") String from,
+                             @Query("eto") String to,
+                             @Query("hid") String hid);
+
+    @GET("/hotel/userchats.php?")
+    Call<List<Chat>> userchats(@Query("email") String email);
+
+    @GET("/hotel/adminmsgchat.php")
+    Call<ResponseData> adminmsgchat(@Query("frm") String frm,
+                                    @Query("hid") String hid,
+                                    @Query("message") String message);
 
 }
