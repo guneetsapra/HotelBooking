@@ -152,7 +152,7 @@ public interface ApiService {
 
     @GET("/hotel/adminmsgchat.php")
     Call<ResponseData> adminmsgchat(@Query("frm") String frm,
-                                    @Query("hid") String hid,
-                                    @Query("message") String message);
+                               @Query("hid") String hid,
+                               @Query("message") String message);
 
 }

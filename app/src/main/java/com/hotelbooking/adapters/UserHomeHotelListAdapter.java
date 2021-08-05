@@ -85,11 +85,8 @@ public class UserHomeHotelListAdapter extends BaseAdapter {
                 con.startActivity(intent);
             }
         });
-
-
         return hotels;
     }
-
     public void searchHotel(String charText)
     {
         charText = charText.toLowerCase(Locale.getDefault());
@@ -105,6 +102,4 @@ public class UserHomeHotelListAdapter extends BaseAdapter {
         }
         notifyDataSetChanged();
     }
-
-
 }

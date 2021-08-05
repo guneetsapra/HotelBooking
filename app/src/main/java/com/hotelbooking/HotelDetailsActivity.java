@@ -3,7 +3,9 @@ package com.hotelbooking;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -41,6 +43,8 @@ public class HotelDetailsActivity extends AppCompatActivity {
     ListView hotel_reviews;
     List<ReviewPojo> hotelInfo;
     ProgressDialog loading;
+    SharedPreferences sharedPreferences;
+    String sessionemail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,8 @@ public class HotelDetailsActivity extends AppCompatActivity {
         tvlocation=(TextView)findViewById(R.id.tvlocation);
         tvabout=(TextView)findViewById(R.id.tvdescription);
         rv_rating=(RatingBar)findViewById(R.id.rv_rating);
+        sharedPreferences = getApplicationContext().getSharedPreferences(Utils.SHREF, Context.MODE_PRIVATE);
+        sessionemail = sharedPreferences.getString("user_name", "def-val");
 
         hotel_reviews=(ListView)findViewById(R.id.hotel_reviews);
         hotelInfo = new ArrayList<>();
@@ -84,7 +90,6 @@ public class HotelDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i= new Intent(HotelDetailsActivity.this, BookHotelActivity.class);
-
                 i.putExtra("hid",getIntent().getStringExtra("hid"));
                 startActivity(i);
             }
@@ -94,10 +99,16 @@ public class HotelDetailsActivity extends AppCompatActivity {
         imgmsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uriSms = Uri.parse("smsto:1234567899");
-                Intent intentSMS = new Intent(Intent.ACTION_SENDTO, uriSms);
-                intentSMS.putExtra("sms_body", "The SMS text");
-                startActivity(intentSMS);
+//                Uri uriSms = Uri.parse("smsto:1234567899");
+//                Intent intentSMS = new Intent(Intent.ACTION_SENDTO, uriSms);
+//                intentSMS.putExtra("sms_body", "The SMS text");
+//                startActivity(intentSMS);
+
+                Intent intent=new Intent(HotelDetailsActivity.this, ChatHotelActivity.class);
+                intent.putExtra("hid",getIntent().getStringExtra("hid"));
+                intent.putExtra("from",sessionemail);
+                intent.putExtra("to","admin@gmail.com");
+                startActivity(intent);
             }
         });
 

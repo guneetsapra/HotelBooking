@@ -18,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hotelbooking.adapters.RoomsAdapter;
@@ -50,6 +51,8 @@ public class BookHotelActivity extends AppCompatActivity {
     ArrayList<String> type;
     ProgressDialog loading;
     List<RoomsPojo> hotelInfo;
+    TextView tvtotalprice;
+    int p,days;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +66,7 @@ public class BookHotelActivity extends AppCompatActivity {
         hotel_id=(getIntent().getStringExtra("hid"));
         Toast.makeText(BookHotelActivity.this, hotel_id, Toast.LENGTH_SHORT).show();
 
-
+        tvtotalprice=(TextView)findViewById(R.id.tvtotalprice);
         et_name=(EditText)findViewById(R.id.et_name);
         et_age=(EditText)findViewById(R.id.et_age);
         et_date=(EditText)findViewById(R.id.et_date);
@@ -104,7 +107,18 @@ public class BookHotelActivity extends AppCompatActivity {
                     return;
                 }
 
+                p=sp_dyroom.getSelectedItemPosition();
+                hotelInfo.get(p).getPrice();
+              //  Toast.makeText(BookHotelActivity.this, Integer.toString(p), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(BookHotelActivity.this, hotelInfo.get(p).getPrice().toString(), Toast.LENGTH_SHORT).show();
+
                 card.setVisibility(View.VISIBLE);
+                tvtotalprice.setVisibility(View.VISIBLE);
+
+                days=Integer.parseInt(sp_days.getSelectedItem().toString()) * Integer.parseInt(hotelInfo.get(p).getPrice());
+                tvtotalprice.setText("Total amount : "+Integer.toString(days));
+
             }
         });
         btn_payment=(Button) findViewById(R.id.btn_payment);
@@ -249,6 +263,7 @@ public class BookHotelActivity extends AppCompatActivity {
         for(int i=0; i<hotelInfo.size(); i++){
             //Storing names to string array
             items[i] = hotelInfo.get(i).getType();
+
         }
 
         //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
@@ -256,8 +271,8 @@ public class BookHotelActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(BookHotelActivity.this, android.R.layout.simple_list_item_1, items);
         //setting adapter to spinner
         sp_dyroom.setAdapter(adapter);
-        //Creating an array adapter for list view
 
+        //Creating an array adapter for list view
     }
 
     @Override

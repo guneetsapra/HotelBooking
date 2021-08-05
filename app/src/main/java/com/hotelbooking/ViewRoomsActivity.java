@@ -61,6 +61,7 @@ public class ViewRoomsActivity extends AppCompatActivity {
 
         ApiService service = RetroClient.getRetrofitInstance().create(ApiService.class);
         Call<List<RoomsPojo>> call = service.getRooms(getIntent().getStringExtra("hid"));
+
         call.enqueue(new Callback<List<RoomsPojo>>() {
             @Override
             public void onResponse(Call<List<RoomsPojo>> call, Response<List<RoomsPojo>> response) {

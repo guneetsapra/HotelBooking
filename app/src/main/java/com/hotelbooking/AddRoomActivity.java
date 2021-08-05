@@ -161,7 +161,6 @@ public class AddRoomActivity extends AppCompatActivity implements EasyPermission
                 Toast.makeText(AddRoomActivity.this, "Error" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

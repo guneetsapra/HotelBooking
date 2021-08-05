@@ -156,6 +156,19 @@
                         android:entries="@array/payment"
                         />
 
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tvtotalprice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total amount : "
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"/>
+
+
+
                     <Button
                         android:layout_margin="20dp"
                         android:background="@drawable/buttontwo"
